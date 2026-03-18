@@ -22,16 +22,18 @@
             padding: 16px;
         }
 
-        .container {
-            max-width: 1100px;
-            width: 100%;
-            background: #ffffff;
-            border-radius: 32px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
-            padding: 28px 24px;
-            transition: all 0.2s;
-            /* 移除 margin: auto，由父層 flex 控制置中 */
-        }
+      .container {
+    max-width: 1100px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+    padding: 28px 24px;
+    transition: all 0.2s;
+    /* 添加以下两行强制居中（写在花括号里面） */
+    margin-left: auto;
+    margin-right: auto;
+}
 
         /* 標題 */
         .title {
