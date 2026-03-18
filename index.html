@@ -2,9 +2,10 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>匹克球場租用（调试版）</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>匹克球場租用 · 客戶預約</title>
     <style>
+        /* 全域重置 — 簡約乾淨 */
         * {
             margin: 0;
             padding: 0;
@@ -13,24 +14,26 @@
         }
 
         body {
-    background: #f0f2f5;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;      /* 垂直居中 */
-    padding: 16px;
-}
+            background: #f0f2f5;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+            position: relative;          /* 為絕對定位提供參考 */
+        }
 
-.container {
-    max-width: 1100px;
-    width: 100%;
-    background: #ffffff;
-    border-radius: 32px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
-    padding: 28px 24px;
-    transition: all 0.2s;
-    margin-left: auto;
-    margin-right: auto;
-}
+        .container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 1100px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            padding: 28px 24px;
+            transition: all 0.2s;
+        }
 
         /* 標題 */
         .title {
@@ -468,7 +471,10 @@
 
         /* 手機微調 */
         @media (max-width: 550px) {
-            .container { padding: 20px 16px; }
+            .container {
+                padding: 20px 16px;
+                max-width: 95%;          /* 小螢幕時讓容器稍窄 */
+            }
             .title { font-size: 1.9rem; }
             .date-nav { padding: 8px 8px; }
             .date-display { font-size: 1.1rem; padding: 6px 12px; }
@@ -890,16 +896,6 @@
         }
     }
 
-    // ---------- 强制居中函数 ----------
-    function forceCenter() {
-        const container = document.querySelector('.container');
-        if (container) {
-            container.style.marginLeft = 'auto';
-            container.style.marginRight = 'auto';
-        }
-        console.log('[调试] 强制居中已执行');
-    }
-
     // ---------- 初始化 ----------
     function init() {
         updateDateDisplay();
@@ -928,17 +924,6 @@
         loginUsername.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') loginPassword.focus();
         });
-
-        // 强制居中：立即执行 + 延迟多次执行
-        forceCenter();
-        window.addEventListener('DOMContentLoaded', forceCenter);
-        window.addEventListener('load', forceCenter);
-        let count = 0;
-        const interval = setInterval(function() {
-            forceCenter();
-            count++;
-            if (count >= 10) clearInterval(interval);
-        }, 100);
     }
 
     init();
