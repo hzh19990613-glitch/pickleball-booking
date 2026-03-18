@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>匹克球場租用 · 客戶預約</title>
     <style>
-        /* 全域重置 — 簡約乾淨 */
+        /* 全域重置 */
         * {
             margin: 0;
             padding: 0;
@@ -36,10 +36,10 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
             padding: 28px 24px;
             transition: all 0.2s;
-            /* 允許內容過長時滾動 */
+            /* 確保容器高度不超過視口，超出時內部滾動 */
             max-height: calc(100vh - 32px);
             overflow-y: auto;
-            /* 強制居中，防止被覆蓋 */
+            /* 強制水平居中（備用） */
             margin-left: auto !important;
             margin-right: auto !important;
         }
@@ -52,10 +52,10 @@
             color: #1e293b;
             margin-bottom: 24px;
             line-height: 1.2;
-            text-align: left;
+            text-align: left;          /* 標題左對齊，符合設計 */
         }
 
-        /* 日期列 + 箭頭 */
+        /* 日期導航 */
         .date-nav {
             display: flex;
             align-items: center;
@@ -99,7 +99,7 @@
             border-color: #b9c7d6;
         }
 
-        /* 時段網格 — 每小時一個模塊 */
+        /* 時段網格 */
         .slot-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -166,7 +166,7 @@
             color: #4f5d6e;
         }
 
-        /* 選中時段提示 — 加強手機適配 */
+        /* 選中時段提示 */
         .selected-hint {
             background: #eaf3ff;
             padding: 16px 22px;
@@ -216,7 +216,7 @@
             background: #d4e2f5;
         }
 
-        /* 預約表單 — 簡約兩欄 */
+        /* 預約表單 */
         .form-row {
             display: flex;
             flex-wrap: wrap;
@@ -253,7 +253,6 @@
             box-shadow: 0 0 0 4px rgba(129, 153, 181, 0.12);
         }
 
-        /* 電話號碼專用提示 */
         input[type="tel"]:invalid {
             border-color: #faccac;
         }
@@ -283,7 +282,7 @@
             opacity: 0.6;
         }
 
-        /* 管理後台區域 — 預設隱藏 */
+        /* 管理後台區域 */
         .admin-panel {
             display: none;
             margin-top: 32px;
@@ -391,7 +390,6 @@
             padding-top: 22px;
         }
 
-        /* 管理入口連結 */
         .admin-link {
             text-align: center;
             margin-top: 16px;
@@ -412,7 +410,7 @@
             border-color: #94a3b8;
         }
 
-        /* 登入 Modal 樣式 */
+        /* 登入 Modal */
         .modal {
             display: none;
             position: fixed;
@@ -505,26 +503,21 @@
 </head>
 <body>
 <div class="container">
-    <!-- 標題 -->
     <div class="title">🏓 匹克球場租用</div>
 
-    <!-- 日期導航 -->
     <div class="date-nav">
         <button class="arrow-btn" id="prevDayBtn" aria-label="前一天">←</button>
         <span class="date-display" id="currentDateDisplay"></span>
         <button class="arrow-btn" id="nextDayBtn" aria-label="後一天">→</button>
     </div>
 
-    <!-- 時段網格 -->
     <div id="slotGrid" class="slot-grid"></div>
 
-    <!-- 當前選中時段提示 ＋ 清除選取 (客戶可見) -->
     <div class="selected-hint" id="selectedHint">
         <span class="selected-info" id="selectedText">⏺ 尚未選取任何時段</span>
         <button class="clear-selected" id="clearSelectedBtn" type="button">✕ 清除</button>
     </div>
 
-    <!-- 預約表單 (客戶可見) -->
     <div class="form-row">
         <div class="form-group">
             <label>姓名</label>
@@ -539,12 +532,10 @@
         </div>
     </div>
 
-    <!-- 管理後台入口 -->
     <div class="admin-link">
         <button id="toggleAdminBtn">⚙️ 管理後台</button>
     </div>
 
-    <!-- 管理後台區域 (需帳號密碼登入才顯示) -->
     <div class="admin-panel" id="adminPanel">
         <div class="list-header">
             <h2>📌 本日預約 (管理)</h2>
@@ -555,7 +546,6 @@
         </ul>
     </div>
 
-    <!-- 登入 Modal (帳號+密碼) -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <h3>管理員登入</h3>
