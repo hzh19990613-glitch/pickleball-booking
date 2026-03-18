@@ -22,29 +22,28 @@
             background: #f0f2f5;
             margin: 0;
             padding: 16px;
-            display: flex;
-            justify-content: center;   /* 水平居中 */
-            align-items: center;       /* 垂直居中 */
+            position: relative;          /* 作為絕對定位的參考 */
             min-height: 100vh;
         }
 
+        /* 卡片容器：絕對定位居中，並允許內部滾動 */
         .container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             max-width: 1100px;
             width: 100%;
+            max-height: calc(100vh - 32px);   /* 留出上下 padding 空間 */
+            overflow-y: auto;                  /* 內容過長時滾動 */
             background: #ffffff;
             border-radius: 32px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
             padding: 28px 24px;
             transition: all 0.2s;
-            /* 確保容器高度不超過視口，超出時內部滾動 */
-            max-height: calc(100vh - 32px);
-            overflow-y: auto;
-            /* 強制水平居中（備用） */
-            margin-left: auto !important;
-            margin-right: auto !important;
         }
 
-        /* 標題 */
+        /* 標題：左對齊 */
         .title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -52,10 +51,23 @@
             color: #1e293b;
             margin-bottom: 24px;
             line-height: 1.2;
-            text-align: left;          /* 標題左對齊，符合設計 */
+            text-align: left;
         }
 
-        /* 日期導航 */
+        /* 以下所有主要內容區塊設置為居中对齐（通過自動外邊距） */
+        .date-nav,
+        .slot-grid,
+        .selected-hint,
+        .form-row,
+        .admin-link,
+        .admin-panel,
+        .footer-note {
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;               /* 默認佔滿，但配合 margin auto 使其在卡片內居中 */
+        }
+
+        /* 日期導航本身佔滿寬度，內部元素保留原有間距 */
         .date-nav {
             display: flex;
             align-items: center;
@@ -480,6 +492,7 @@
         @media (max-width: 550px) {
             .container {
                 padding: 20px 16px;
+                max-width: 95%;
             }
             .title { font-size: 1.9rem; }
             .date-nav { padding: 8px 8px; }
@@ -503,8 +516,10 @@
 </head>
 <body>
 <div class="container">
+    <!-- 標題：左對齊 -->
     <div class="title">🏓 匹克球場租用</div>
 
+    <!-- 以下所有區塊均會自動在卡片內居中（因為已設置 margin: 0 auto） -->
     <div class="date-nav">
         <button class="arrow-btn" id="prevDayBtn" aria-label="前一天">←</button>
         <span class="date-display" id="currentDateDisplay"></span>
