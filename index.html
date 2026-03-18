@@ -13,12 +13,18 @@
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
         }
 
+        /* 確保 html 和 body 佔滿全屏，並作為絕對定位的參考容器 */
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
         body {
             background: #f0f2f5;
-            min-height: 100vh;
             margin: 0;
             padding: 16px;
-            position: relative;          /* 為絕對定位提供參考 */
+            position: relative;          /* 作為 .container 絕對定位的參考 */
+            min-height: 100vh;           /* 備用 */
         }
 
         .container {
@@ -473,7 +479,7 @@
         @media (max-width: 550px) {
             .container {
                 padding: 20px 16px;
-                max-width: 95%;          /* 小螢幕時讓容器稍窄 */
+                max-width: 95%;
             }
             .title { font-size: 1.9rem; }
             .date-nav { padding: 8px 8px; }
@@ -492,6 +498,14 @@
             .clear-selected {
                 align-self: flex-end;
             }
+        }
+
+        /* 額外保險：確保絕對定位始終有效 */
+        .container {
+            position: absolute !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
         }
     </style>
 </head>
